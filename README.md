@@ -18,7 +18,8 @@ Your existing Drive project reloads from `the Drive project folder configured in
 
 - Direct Colab GPU generation, with an explicit experimental CPU option.
 - Text prompts, image references, character/location/style memory and fixed seeds.
-- Five-second small drafts: 41 frames at 8 fps.
+- Selectable 5, 8 or 10 seconds of generated motion at 8 fps; longer clips require more memory and time.
+- Base-checkpoint guidance corrected to 5.0; default 24 steps, with 8/16-step previews and a 50-step option. GPU uses BF16 when supported, otherwise FP16.
 - Separate saved neural voices for characters and narrator; real human recording uploads.
 - Procedural engine hum, drill, radio static and alert beeps.
 - Speech merging and assembly preserving audio.
@@ -40,3 +41,8 @@ Output defaults are low-resolution drafts, not HD. Generated voices are syntheti
 - FFmpeg: https://ffmpeg.org/
 
 Review model, service, dependency and recording rights before commercial distribution. No model weights, manuscript, recordings, tokens or generated media are included in this repository.
+
+
+## Development evidence
+
+See [PROGRESS.md](PROGRESS.md) for checks, unverified paths and next priorities, and [SOURCES.md](SOURCES.md) for the research ledger.
