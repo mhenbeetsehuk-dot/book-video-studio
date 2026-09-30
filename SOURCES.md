@@ -21,3 +21,10 @@ Reference snapshots now carry a SHA-256 checksum, dimensions, byte size and orig
 
 - https://ffmpeg.org/ffprobe.html — Query actual media duration through show_entries, rather than estimating speech from word count. Implemented preflight measurement for recorded/synthesized audio. Duration planning tested with actual WAV files.
 - https://ffmpeg.org/ffmpeg-filters.html#tpad — stop_mode=clone repeats the last frame; it does not create new motion. Keep legacy manual voice merging honest; automatic speech now plans enough motion within the bounded single-shot limit, or refuses before video inference. No multi-shot continuation or lip sync claim.
+
+## Runtime evidence review — 2026-09-30
+
+- https://docs.pytorch.org/docs/stable/generated/torch.cuda.get_device_properties.html — PyTorch exposes CUDA device properties for the active runtime. The diagnostic records device name, compute capability and total memory only when CUDA is available.
+- https://docs.python.org/3/library/importlib.metadata.html — Python's standard library exposes installed distribution versions. The diagnostic queries a fixed allow-list of video dependencies rather than dumping the full environment.
+
+The manifest deliberately excludes environment variables, prompts, references, audio, manuscript content and tokens. It was validated with a simulated CUDA device and the current CPU runtime; it does not prove GPU inference works.

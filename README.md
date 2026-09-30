@@ -26,6 +26,9 @@ Your existing Drive project reloads from `the Drive project folder configured in
 - Automatic speech duration measured before video inference; motion expands within the 5/8/10-second choices and reuses that prepared voice. Longer speech stops before video inference and needs multiple shots.
 - Speech merging and assembly preserving audio.
 - Logs and saved per-clip requests.
+- A privacy-safe `runtime_manifest.py` diagnostic records the Python, dependency and GPU configuration used for a run without collecting prompts, media, manuscript text, tokens or environment variables.
+
+Before a GPU test, run `python runtime_manifest.py --output runtime_manifest.json` from a repository checkout. Keep the resulting manifest with the private test logs; inspect it before sharing because machine names and project content are intentionally excluded, but hardware and package versions are included.
 
 ## Current limitations
 
@@ -36,6 +39,8 @@ Colab GPU access is required for practical generation and is not guaranteed by t
 Output defaults are low-resolution drafts, not HD. Generated voices are synthetic, despite human-like sound; preview them or upload actual recordings. The speech service needs internet and may fail. Sound effects are synthesized approximations. Automatic speech now plans a bounded motion duration before inference; speech beyond the single-shot limit is rejected with a multi-shot instruction. Manually adding long speech to an existing clip still extends its last frame. Exact lip synchronization is not implemented. Character memory and reference images do not guarantee identical appearances.
 
 New generations resolve the model repository's current `main` revision once, record its immutable commit hash, and pass that same revision to all model loaders. Reference snapshots are checksummed after copying. This improves auditability and cache correctness; it does not make diffusion output perfectly deterministic across different hardware or library builds.
+
+The runtime manifest is currently a separate diagnostic command; the Colab notebook does not yet invoke it automatically.
 
 ## Sources and dependencies
 
@@ -50,4 +55,3 @@ Review model, service, dependency and recording rights before commercial distrib
 ## Development evidence
 
 See [PROGRESS.md](PROGRESS.md) for checks, unverified paths and next priorities, and [SOURCES.md](SOURCES.md) for the research ledger.
-
