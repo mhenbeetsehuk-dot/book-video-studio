@@ -38,3 +38,11 @@ Validation: ten dependency-free checks pass, including all notebook and subproce
 Read current main at `a5e62e5ef27d231b7b76dd0328c37caf2c83b811` and preserved all notebook behaviour. Added `runtime_manifest.py`, a standalone diagnostic that records an allow-listed set of package versions plus Python, platform and CUDA device facts. It explicitly does not collect environment variables, tokens, prompts, references, recordings or manuscript content. The notebook is unchanged; automatic manifest capture remains future work.
 
 Validation: 12 checks pass. Two new tests verify the JSON manifest, a simulated CUDA device record, privacy flags and CLI output. Existing notebook compilation, timing and provenance checks continue to pass. No GPU inference, model download, external voice request or visual-quality evaluation ran. This improves diagnosis and reproducibility evidence only; it does not increase free compute or prove the direct renderer works.
+
+## Fifth cycle — validate exports before accepting output
+
+Read current main at `c4a59de380cfefb61b94c0a7a0806b6150d2b6aa`, the notebook and previous reports. Added standalone `media_validation.py`: decoded first-video-stream frame count, duration, dimensions, FPS and checksum; reject missing, empty, damaged or mismatched files, or clips shorter than five seconds/the supplied speech duration. CLI returns JSON and a nonzero failure status. Preserved the notebook and all existing user content.
+
+Validation: 16 tests pass, including four new real FFmpeg fixture/CLI tests for successful decoding, checksum, missing/corrupt output, duration/speech coverage and expected-property mismatches. Prior timing, notebook compilation, reference provenance and runtime-manifest tests continue to pass. No model download, GPU inference, external voice request or visual-quality evaluation performed.
+
+Limits: manual checker is not invoked automatically by the notebook. It does not establish motion quality, audio presence or lip sync; maximum probe runtime is 120 seconds. No new compute access is provided. Next priorities: a manuscript-free notebook template for safe public integration, automated export acceptance, and end-to-end inference on available CUDA hardware before claiming renderer success.

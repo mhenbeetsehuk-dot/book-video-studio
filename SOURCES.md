@@ -28,3 +28,7 @@ Reference snapshots now carry a SHA-256 checksum, dimensions, byte size and orig
 - https://docs.python.org/3/library/importlib.metadata.html — Python's standard library exposes installed distribution versions. The diagnostic queries a fixed allow-list of video dependencies rather than dumping the full environment.
 
 The manifest deliberately excludes environment variables, prompts, references, audio, manuscript content and tokens. It was validated with a simulated CUDA device and the current CPU runtime; it does not prove GPU inference works.
+
+## 2026-09-30 — output integrity follow-up
+
+Revisited [official FFprobe documentation](https://ffmpeg.org/ffprobe.html) specifically for `-count_frames`, `-select_streams`, `-show_entries` and JSON output, rather than repeating the earlier audio-duration research. Applied these to a standalone local video diagnostic. Decoded frame count, stream duration and file hash provide output evidence; they do not establish visual realism or lip synchronization.

@@ -55,3 +55,9 @@ Review model, service, dependency and recording rights before commercial distrib
 ## Development evidence
 
 See [PROGRESS.md](PROGRESS.md) for checks, unverified paths and next priorities, and [SOURCES.md](SOURCES.md) for the research ledger.
+
+## Check a rendered video
+
+With FFmpeg/FFprobe installed, run `python media_validation.py clip.mp4 --speech-seconds 7.2`. This standalone checker decodes/counts the first video stream and rejects missing, empty, damaged or short files. The minimum is five seconds. Optional `--expected-frames`, `--expected-fps`, `--width` and `--height` compare the export with a generation request. JSON output contains file properties and a SHA-256 checksum, without prompts or media content; failure returns exit code 1.
+
+This is a manual diagnostic, not yet wired into the notebook. It cannot judge visual quality, verify lip synchronization, detect frozen frames or prove audio is present. For long files decoding may reach its 120-second validation limit. No model or GPU is needed to run it.
