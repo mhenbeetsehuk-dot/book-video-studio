@@ -9,6 +9,13 @@ Reviewed 2026-09-30. Two targeted primary documents reviewed in this cycle; exis
 
 Next research: LTX reference conditioning and continuation, bounded speech-length motion, Kaggle official compute policy, voice-service usage and model rights. Novel panel image generation is a separate planned workflow; it is not implemented by these video changes.
 
+## Reproducibility and continuity review — 2026-09-30
+
+- https://huggingface.co/docs/huggingface_hub/en/package_reference/file_download — official Hub documentation says a revision can be resolved to a commit hash and then reused to pin downloads. Implemented one revision resolution per clip and passed it to tokenizer, text encoder and video pipeline loaders.
+- https://huggingface.co/docs/diffusers/api/models/overview — official Diffusers API documents `revision` as a branch, tag or commit identifier for `from_pretrained`. Recorded the resolved revision in `request.json` and included it in the embedding-cache fingerprint.
+
+Reference snapshots now carry a SHA-256 checksum, dimensions, byte size and original filename. This is local provenance metadata, not a claim of identity consistency or cross-hardware determinism. No weights were downloaded and no GPU generation was run in this review.
+
 
 ## Speech timing review — 2026-09-30
 

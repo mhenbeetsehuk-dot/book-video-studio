@@ -18,6 +18,7 @@ Your existing Drive project reloads from `the Drive project folder configured in
 
 - Direct Colab GPU generation, with an explicit experimental CPU option.
 - Text prompts, image references, character/location/style memory and fixed seeds.
+- Immutable model-revision records and SHA-256 reference-image manifests (dimensions, byte size and original filename) in every new clip request.
 - Selectable 5, 8 or 10 seconds of generated motion at 8 fps; longer clips require more memory and time.
 - Base-checkpoint guidance corrected to 5.0; default 24 steps, with 8/16-step previews and a 50-step option. GPU uses BF16 when supported, otherwise FP16.
 - Separate saved neural voices for characters and narrator; real human recording uploads.
@@ -33,6 +34,8 @@ Hosted Hugging Face Spaces inference and ZeroGPU requests have been removed. Pub
 Colab GPU access is required for practical generation and is not guaranteed by this program. CPU inference is experimental, can take hours and can exceed RAM. At least 20 GB free disk and 10 GB available RAM are checked before inference. Direct inference has not yet been verified end to end on a GPU in this project. Code syntax and procedural audio synthesis have been checked; the earlier hosted workflow produced a 5.1-second silent test, which does not validate the direct engine.
 
 Output defaults are low-resolution drafts, not HD. Generated voices are synthetic, despite human-like sound; preview them or upload actual recordings. The speech service needs internet and may fail. Sound effects are synthesized approximations. Automatic speech now plans a bounded motion duration before inference; speech beyond the single-shot limit is rejected with a multi-shot instruction. Manually adding long speech to an existing clip still extends its last frame. Exact lip synchronization is not implemented. Character memory and reference images do not guarantee identical appearances.
+
+New generations resolve the model repository's current `main` revision once, record its immutable commit hash, and pass that same revision to all model loaders. Reference snapshots are checksummed after copying. This improves auditability and cache correctness; it does not make diffusion output perfectly deterministic across different hardware or library builds.
 
 ## Sources and dependencies
 
