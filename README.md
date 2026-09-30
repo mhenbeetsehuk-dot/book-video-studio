@@ -22,6 +22,7 @@ Your existing Drive project reloads from `the Drive project folder configured in
 - Base-checkpoint guidance corrected to 5.0; default 24 steps, with 8/16-step previews and a 50-step option. GPU uses BF16 when supported, otherwise FP16.
 - Separate saved neural voices for characters and narrator; real human recording uploads.
 - Procedural engine hum, drill, radio static and alert beeps.
+- Automatic speech duration measured before video inference; motion expands within the 5/8/10-second choices and reuses that prepared voice. Longer speech stops before video inference and needs multiple shots.
 - Speech merging and assembly preserving audio.
 - Logs and saved per-clip requests.
 
@@ -31,7 +32,7 @@ Hosted Hugging Face Spaces inference and ZeroGPU requests have been removed. Pub
 
 Colab GPU access is required for practical generation and is not guaranteed by this program. CPU inference is experimental, can take hours and can exceed RAM. At least 20 GB free disk and 10 GB available RAM are checked before inference. Direct inference has not yet been verified end to end on a GPU in this project. Code syntax and procedural audio synthesis have been checked; the earlier hosted workflow produced a 5.1-second silent test, which does not validate the direct engine.
 
-Output defaults are low-resolution drafts, not HD. Generated voices are synthetic, despite human-like sound; preview them or upload actual recordings. The speech service needs internet and may fail. Sound effects are synthesized approximations. Speech longer than the footage extends the last frame rather than generating additional motion. Exact lip synchronization is not implemented. Character memory and reference images do not guarantee identical appearances.
+Output defaults are low-resolution drafts, not HD. Generated voices are synthetic, despite human-like sound; preview them or upload actual recordings. The speech service needs internet and may fail. Sound effects are synthesized approximations. Automatic speech now plans a bounded motion duration before inference; speech beyond the single-shot limit is rejected with a multi-shot instruction. Manually adding long speech to an existing clip still extends its last frame. Exact lip synchronization is not implemented. Character memory and reference images do not guarantee identical appearances.
 
 ## Sources and dependencies
 
@@ -46,3 +47,4 @@ Review model, service, dependency and recording rights before commercial distrib
 ## Development evidence
 
 See [PROGRESS.md](PROGRESS.md) for checks, unverified paths and next priorities, and [SOURCES.md](SOURCES.md) for the research ledger.
+

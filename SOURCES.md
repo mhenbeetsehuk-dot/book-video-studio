@@ -8,3 +8,9 @@ Reviewed 2026-09-30. Two targeted primary documents reviewed in this cycle; exis
 | [Google Colab FAQ](https://research.google.com/colaboratory/faq.html) | Free resources and accelerator types are not guaranteed; limits and availability vary. | Retain explicit GPU checks and experimental CPU choice. No quota bypass, paid fallback or guaranteed free GPU claim. | Cannot allocate a Colab GPU from this development environment. |
 
 Next research: LTX reference conditioning and continuation, bounded speech-length motion, Kaggle official compute policy, voice-service usage and model rights. Novel panel image generation is a separate planned workflow; it is not implemented by these video changes.
+
+
+## Speech timing review — 2026-09-30
+
+- https://ffmpeg.org/ffprobe.html — Query actual media duration through show_entries, rather than estimating speech from word count. Implemented preflight measurement for recorded/synthesized audio. Duration planning tested with actual WAV files.
+- https://ffmpeg.org/ffmpeg-filters.html#tpad — stop_mode=clone repeats the last frame; it does not create new motion. Keep legacy manual voice merging honest; automatic speech now plans enough motion within the bounded single-shot limit, or refuses before video inference. No multi-shot continuation or lip sync claim.

@@ -19,3 +19,10 @@ Read current main at `0fa6930be64db5702bbdbe012f3711b8cceadaab`, README and note
 ## Limits and next priorities
 
 Free Colab GPU availability is controlled by Google. Increasing duration costs memory and time; this change does not provide extra compute. Direct GPU rendering still needs end-to-end verification. Existing output sizes remain draft quality. Long speech still holds the last frame once generated motion ends, and lip synchronization is not implemented. Next: measure actual audio before generation, plan bounded continuation shots for its full duration, validate reference preservation and CUDA generation on an available GPU, and improve checkpoint/version reproducibility. Keep public reports free of manuscript and personal media.
+
+
+## Second cycle — speech-first motion planning
+
+Read current main at 6dc283c3e3a2c2b11588d877b14fed50e26d6aeb and prior progress/source records. Added automatic voice preparation before video inference, actual FFprobe duration measurement, a saved timing plan, and prepared-audio reuse after rendering. Motion expands to a supported 5/8/10-second choice, with a 0.2-second audio tail. Lines exceeding the bounded single-shot motion capacity fail before model loading, avoiding wasted video compute. Legacy manual add-voice mode still uses frame holds. Full multi-shot speech motion and lip sync remain future work.
+
+Validation: notebook/subprocess compilation and prior three regressions pass; additional real-WAV/FFprobe duration planning, invalid durations, supported boundaries, long-speech rejection and prepared-audio reuse checks pass. No external voice-service calls or model generation performed. No measured GPU speed or visual-quality improvement claimed.
