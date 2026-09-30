@@ -1,0 +1,11 @@
+__pycache__/
+.venv/
+.env
+*.mp4
+*.wav
+*.mp3
+*.safetensors
+*.pt
+models/
+outputs/
+recordings/
